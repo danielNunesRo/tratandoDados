@@ -1,0 +1,33 @@
+
+```{r}
+dados = read.csv("C:\\Users\\Daniel\\Documents\\tempo.csv", sep=";", na.strings = "", stringsAsFactors = T)
+print(dados)
+```
+
+```{r}
+dados[!complete.cases(dados),]
+
+```
+
+
+
+
+```{r}
+dados$Umidade <- replace(dados$Umidade,is.na(dados$Umidade),median(dados$Umidade, na.rm = T))
+summary(dados$Umidade)
+
+
+dados$Vento <- replace(dados$Vento,is.na(dados$Vento),"FALSO")
+
+summary(dados$Vento)
+
+
+
+```
+
+```{r}
+dados[dados$Temperatura > 130 | dados$Temperatura < -130,]$Temperatura = median(dados$Temperatura)
+barplot(dados$Temperatura)
+dados[dados$Umidade > 100 | dados$Temperatura < 0,]$Umidade = median(dados$Umidade)
+barplot(dados$Umidade)
+```
